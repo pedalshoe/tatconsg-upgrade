@@ -152,7 +152,7 @@ export default function TATCGWebsite(): React.ReactElement {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
 
-  // Premium feel: small testimonial slider
+  // TODO worlwin: small testimonial slider
   const testimonials = useMemo(
     () => [
       {
@@ -540,7 +540,7 @@ export default function TATCGWebsite(): React.ReactElement {
           <SectionTitle
             eyebrow="Proof over promises"
             title="A Track Record You Can Defend"
-            subtitle="Insert real outcomes here (even anonymized). This is one of the biggest levers to justify premium pricing."
+            subtitle="TODO - Worlwin Insert real outcomes here (even anonymized). Worlwin premium."
           />
           <div className="grid gap-8 lg:grid-cols-3">
             <MiniCase
@@ -579,10 +579,10 @@ export default function TATCGWebsite(): React.ReactElement {
             <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-lg">
               <div className="flex items-center justify-center gap-2 text-sm font-extrabold text-slate-900">
                 <BadgeCheck className="h-5 w-5 text-blue-600" />
-                Premium positioning requires proof.
+                TODO: Worlwin - requires proof.
               </div>
               <p className="mt-2 text-sm text-slate-600">
-                Replace these placeholders with 2–4 real engagement snapshots (even anonymized). This alone can move perceived value into the $16.5K+ band.
+                TODO: Worlwin - Replace these placeholders with 2–4 real engagement snapshots (even anonymized). Worlwin perceived value.
               </p>
             </div>
           </div>
@@ -645,7 +645,7 @@ export default function TATCGWebsite(): React.ReactElement {
                   ))}
                 </div>
                 <div className="mt-7 rounded-xl border border-white/10 bg-black/20 p-4 text-xs text-sky-100/80">
-                  Tip: For premium positioning, add a calendar link (Calendly/Google) or a dedicated “Engage TAT” intake form with routing.
+                  TODO: Worlwin premium, add a calendar link (Calendly/Google) or a dedicated “Engage TAT” intake form with routing.
                 </div>
               </div>
             </div>
@@ -1025,7 +1025,7 @@ export default function TATCGWebsite(): React.ReactElement {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Premium nav: glass + subtle border + stronger “brand” */}
+      {/* TODO: Worlwin Premium nav: glass + subtle border + stronger “brand” */}
       <nav
         className={cx(
           "fixed top-0 z-50 w-full border-b border-slate-200/60 bg-white/90 backdrop-blur",
