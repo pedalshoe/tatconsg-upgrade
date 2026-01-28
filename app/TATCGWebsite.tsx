@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import {FaInstagram, FaFacebook, FaLinkedin, FaYoutube} from "react-icons/fa6";
 import {
   Menu,
   X,
@@ -11,8 +12,6 @@ import {
   Mail,
   MapPin,
   Clock,
-  Linkedin,
-  Facebook,
   Send,
   CheckCircle,
   AlertCircle,
@@ -24,9 +23,7 @@ import {
   Sparkles,
   Target,
   BarChart3,
-  BadgeCheck,
-  Instagram,
-  Youtube
+  BadgeCheck
 } from "lucide-react";
 
 interface FormData {
@@ -1141,16 +1138,16 @@ export default function TATCGWebsite(): React.ReactElement {
               </p>
               <div className="mt-5 flex gap-4">
                 <a href="https://www.instagram.com/tatconsg/" className="text-slate-300 transition hover:text-cyan-200" aria-label="Instagram">
-                  <Instagram className="h-5 w-5" />
+                  <FaInstagram className="h-5 w-5" />
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=100084630167619&sk=about" className="text-slate-300 transition hover:text-cyan-200" aria-label="Facebook">
-                  <Facebook className="h-5 w-5" />
+                  <FaFacebook className="h-5 w-5" />
                 </a>
                 <a href="https://www.linkedin.com/company/tat-consulting-group-inc/" className="text-slate-300 transition hover:text-cyan-200" aria-label="LinkedIn">
-                  <Linkedin className="h-5 w-5" />
+                  <FaLinkedin className="h-5 w-5" />
                 </a>
                 <a href="https://www.youtube.com/channel/UC8uuFGT34gXfa79LuO6zADg" className="text-slate-300 transition hover:text-cyan-200" aria-label="Facebook">
-                  <Youtube className="h-5 w-5" />
+                  <FaYoutube className="h-5 w-5" />
                 </a>
               </div>
             </div>
