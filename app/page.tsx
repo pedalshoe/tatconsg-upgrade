@@ -1,5 +1,5 @@
-// app/page.tsx
-import TATCGWebsite from "./TATCGWebsite";
-export default function Home() {
-  return <TATCGWebsite />;
+import { redirect } from "next/navigation";
+
+export default function RootPage() {
+  redirect("/en");
 }
