@@ -7,6 +7,7 @@ import {
   Menu,
   X,
   Building2,
+  Check,
   ChevronDown,
   ChevronRight,
   Globe,
@@ -1115,9 +1116,6 @@ export default function TATCGWebsite(): React.ReactElement {
                   aria-label="Change language"
                 >
                   <Globe className="h-4 w-4" />
-                  <span className="hidden lg:inline">
-                    {LOCALES.find((l) => l.code === currentLocale)?.label ?? currentLocale}
-                  </span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
                 </button>
 
@@ -1140,6 +1138,7 @@ export default function TATCGWebsite(): React.ReactElement {
                       <div className="pb-2">
                         {LOCALES.map((l) => {
                           const active = l.code === currentLocale;
+
                           return (
                             <button
                               key={l.code}
@@ -1155,10 +1154,16 @@ export default function TATCGWebsite(): React.ReactElement {
                                 <span className="text-lg leading-none">{l.flag}</span>
                                 <span>{l.label}</span>
                               </span>
-                              <span className="text-xs font-extrabold text-slate-500">{l.code}</span>
+
+                              <span className="flex items-center gap-3">
+                                <span className="text-xs font-extrabold text-slate-500">{l.code}</span>
+                                {active && <Check className="h-4 w-4 text-blue-700" aria-label="Current language" />}
+                              </span>
                             </button>
                           );
                         })}
+
+
                       </div>
                     </div>
                   </>
