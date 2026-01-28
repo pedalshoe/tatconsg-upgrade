@@ -194,6 +194,11 @@ export default function TATCGWebsite(): React.ReactElement {
     return () => clearInterval(t);
   }, [testimonials.length]);
 
+  useEffect(() => {
+    // Jump to top on page change
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   const menuItems = useMemo(
     () => [
       { id: "home", label: "Home" },
@@ -212,6 +217,8 @@ export default function TATCGWebsite(): React.ReactElement {
         title: "Business Advisory",
         description:
           "Executive-grade strategy and operational execution that turns complexity into momentum.",
+        description_detail: "Our business advisory practice helps clients strengthen resilience, governance, and growth through strategic interventions.",
+        description_body: "<p>Human Resources Outsource: Recruiting, onboarding, management, regulatory compliance, salary processing of local and expat staff.</p><br /><p><strong>Business Continuity & Succession Planning</strong>: Designing transition frameworks and risk management strategies for sustainable operations.</p><br /><p><strong>Extractive Sector Concession Planning & Negotiation</strong>: Structuring fiscal terms, advising on contract negotiations, and ensuring compliance with local content laws.</p><br /><p><strong>Special Projects Support</strong>:<ul style='margin-left: 10px; list-style-type:none;'><li>Fixed Asset Verification</li><li>Inventory Verification & Management</li><li>Business Process Improvement and Internal Control Design</li></ul></p>",
         details: [
           "Strategic Planning",
           "M&A Support",
@@ -226,6 +233,8 @@ export default function TATCGWebsite(): React.ReactElement {
         title: "Tax Advisory",
         description:
           "Transfer pricing, compliance, and dispute support engineered to withstand regulatory pressure.",
+        description_detail: "TAT offers end-to-end tax solutions that combine technical accuracy with strategic insight, ensuring compliance and efficiency across jurisdictions.",
+        description_body: "<p><strong>Transfer Pricing Documentation & Planning:</strong> Aligning intercompany transactions with OECD and local requirements.</p><br /><p><strong>Tax Dispute & Resolution:</strong> Managing audits, appeals, and settlements with tax authorities.</p><p>Tac Health Check: risk mitigration and planning optimation</p><br /><p><strong>M&A Due Diligence</strong>: Pre- and post-acquisition assessments for potential tax exposures and integration efficiency.</p><p><strong>Tax Compliance & Reporting:</strong> Preparation and filing of returns, and tax computations.</p>",
         details: [
           "Transfer Pricing",
           "Tax Compliance",
@@ -238,8 +247,9 @@ export default function TATCGWebsite(): React.ReactElement {
       {
         icon: GraduationCap,
         title: "Professional Development",
-        description:
-          "High-impact training, internships, and talent systems built to raise performance across teams.",
+        description: "High-impact training, internships, and talent systems built to raise performance across teams.",
+        description_detail: "We bridge the gap between academic learning and industry readiness through practical, results-driven training programs.",
+        description_body: "<p><strong>Onboarding Training</strong>: Orientation programs for new hires, integrating culture, compliance, and performance expectations.</p><br /><p><strong>Junior Executive Program</strong>: Foundational business, leadership, and communication training for early-career professionals.</p><br /><p><strong>Sector Series</strong>: Industry-specific modules (Telecom, Extractives, Aviation, Finance) developed with partners and experts.</p><br /><p>Delivery Options: At TAT model training facilities, at client sites, or virtually through our hybrid learning platforms.</p>",
         details: [
           "Corporate Training",
           "Internship Programs",
@@ -514,7 +524,7 @@ export default function TATCGWebsite(): React.ReactElement {
                   <h3 className="mt-5 text-xl font-extrabold text-slate-900">{service.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">{service.description}</p>
                   <div className="mt-6 space-y-2">
-                    {service.details.slice(0, 4).map((d) => (
+                    {service.details.slice(0, 6).map((d) => (
                       <div key={d} className="flex items-start gap-2 text-sm text-slate-600">
                         <ChevronRight className="mt-0.5 h-4 w-4 text-blue-600" />
                         <span>{d}</span>
@@ -676,7 +686,7 @@ export default function TATCGWebsite(): React.ReactElement {
                   </div>
                   <div className="flex-1">
                     <h2 className="text-2xl font-extrabold text-slate-900">{service.title}</h2>
-                    <p className="mt-2 text-slate-600">{service.description}</p>
+                    <p className="mt-2 text-slate-600">{service.description_detail}</p>
 
                     <div className="mt-6 grid gap-3 md:grid-cols-2">
                       {service.details.map((detail) => (
@@ -685,6 +695,9 @@ export default function TATCGWebsite(): React.ReactElement {
                           <span>{detail}</span>
                         </div>
                       ))}
+                    </div>
+                    <br />
+                    <div className="text-slate-600" dangerouslySetInnerHTML={{ __html: service.description_body }}>
                     </div>
 
                     <div className="mt-8 flex flex-wrap gap-3">
