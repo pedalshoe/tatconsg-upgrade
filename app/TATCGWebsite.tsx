@@ -25,6 +25,8 @@ import {
   Target,
   BarChart3,
   BadgeCheck,
+  Instagram,
+  Youtube
 } from "lucide-react";
 
 interface FormData {
@@ -1138,11 +1140,17 @@ export default function TATCGWebsite(): React.ReactElement {
                 Advisory built for pressure. Execution built for outcomes.
               </p>
               <div className="mt-5 flex gap-4">
-                <a href="#" className="text-slate-300 transition hover:text-cyan-200" aria-label="LinkedIn">
+                <a href="https://www.instagram.com/tatconsg/" className="text-slate-300 transition hover:text-cyan-200" aria-label="Instagram">
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100084630167619&sk=about" className="text-slate-300 transition hover:text-cyan-200" aria-label="Facebook">
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a href="https://www.linkedin.com/company/tat-consulting-group-inc/" className="text-slate-300 transition hover:text-cyan-200" aria-label="LinkedIn">
                   <Linkedin className="h-5 w-5" />
                 </a>
-                <a href="#" className="text-slate-300 transition hover:text-cyan-200" aria-label="Facebook">
-                  <Facebook className="h-5 w-5" />
+                <a href="https://www.youtube.com/channel/UC8uuFGT34gXfa79LuO6zADg" className="text-slate-300 transition hover:text-cyan-200" aria-label="Facebook">
+                  <Youtube className="h-5 w-5" />
                 </a>
               </div>
             </div>
@@ -1165,7 +1173,7 @@ export default function TATCGWebsite(): React.ReactElement {
               <div className="mt-6 space-y-2">
                 <div className="flex items-center gap-2 text-sm text-slate-300">
                   <Mail className="h-4 w-4 text-cyan-200" />
-                  <span>frontdesk@tatconsg.com</span>
+                  <span><a href="mailto:frontdesk@tatconsg.com">frontdesk@tatconsg.com</a></span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-slate-300">
                   <Clock className="h-4 w-4 text-cyan-200" />
