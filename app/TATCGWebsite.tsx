@@ -362,7 +362,7 @@ export default function TATCGWebsite(): React.ReactElement {
 
             <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
               Advisory Built for Pressure.
-              <span className="mt-2 block bg-gradient-to-r from-sky-200 via-cyan-200 to-white bg-clip-text text-transparent">
+              <span className="mt-2 block bg-gradient-to-r from-sky-200 via-cyan-200 to-white bg-clip-text text-transparent pb-1">
                 Strategy. Tax. Talent. Executed.
               </span>
             </h1>
