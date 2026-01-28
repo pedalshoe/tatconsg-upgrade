@@ -524,7 +524,7 @@ export default function TATCGWebsite(): React.ReactElement {
                   <h3 className="mt-5 text-xl font-extrabold text-slate-900">{service.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">{service.description}</p>
                   <div className="mt-6 space-y-2">
-                    {service.details.slice(0, 6).map((d) => (
+                    {service.details.slice(0, 4).map((d) => (
                       <div key={d} className="flex items-start gap-2 text-sm text-slate-600">
                         <ChevronRight className="mt-0.5 h-4 w-4 text-blue-600" />
                         <span>{d}</span>
