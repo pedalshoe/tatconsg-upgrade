@@ -2,11 +2,14 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import {FaInstagram, FaFacebook, FaLinkedin, FaYoutube} from "react-icons/fa6";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
   X,
-  ChevronRight,
   Building2,
+  ChevronDown,
+  ChevronRight,
+  Globe,
   TrendingUp,
   GraduationCap,
   Mail,
@@ -150,6 +153,37 @@ export default function TATCGWebsite(): React.ReactElement {
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+
+  const router = useRouter();
+  const pathname = usePathname() || "/";
+
+  const LOCALES = useMemo(
+    () => [
+      { code: "en-LR", label: "English-Liberia", flag: "🇱🇷" },
+      { code: "en-SL", label: "English-Sierra Leone", flag: "🇸🇱" },
+      { code: "en-US", label: "English-US", flag: "🇺🇸" },
+      { code: "fr-FR", label: "French-France", flag: "🇫🇷" },
+    ] as const,
+    []
+  );
+
+  type LocaleCode = (typeof LOCALES)[number]["code"];
+
+  const currentLocale = useMemo<LocaleCode>(() => {
+    const seg = pathname.split("/")[1] || "";
+    const found = LOCALES.find((l) => l.code === seg);
+    return (found?.code || "en-US") as LocaleCode;
+  }, [pathname, LOCALES]);
+
+  const [localeOpen, setLocaleOpen] = useState(false);
+
+  const switchLocale = (next: LocaleCode) => {
+    setLocaleOpen(false);
+    // Keep it simple: locales are your top-level route segment: /en-US, /en-LR, /en-SL, /fr-FR
+    router.push(`/${next}`);
+    // Optional: keep the current in-page section consistent
+    // setCurrentPage("home");
+  };
 
   // TODO worlwin: small testimonial slider
   const testimonials = useMemo(
@@ -1069,6 +1103,69 @@ export default function TATCGWebsite(): React.ReactElement {
                   {item.label}
                 </button>
               ))}
+
+              {/* Locale Switcher */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setLocaleOpen((v) => !v)}
+                  className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-50 hover:text-blue-700"
+                  aria-haspopup="menu"
+                  aria-expanded={localeOpen}
+                  aria-label="Change language"
+                >
+                  <Globe className="h-4 w-4" />
+                  <span className="hidden lg:inline">
+                    {LOCALES.find((l) => l.code === currentLocale)?.label ?? currentLocale}
+                  </span>
+                  <ChevronDown className="h-4 w-4 opacity-70" />
+                </button>
+
+                {localeOpen && (
+                  <>
+                    {/* click-away overlay */}
+                    <button
+                      aria-label="Close language menu"
+                      className="fixed inset-0 z-40 cursor-default"
+                      onClick={() => setLocaleOpen(false)}
+                    />
+                    <div
+                      className="absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
+                      role="menu"
+                    >
+                      <div className="px-4 py-3 text-xs font-extrabold uppercase tracking-widest text-slate-500">
+                        Language / Locale
+                      </div>
+
+                      <div className="pb-2">
+                        {LOCALES.map((l) => {
+                          const active = l.code === currentLocale;
+                          return (
+                            <button
+                              key={l.code}
+                              type="button"
+                              onClick={() => switchLocale(l.code)}
+                              className={cx(
+                                "flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-bold transition",
+                                active ? "bg-blue-50 text-blue-800" : "text-slate-800 hover:bg-slate-50"
+                              )}
+                              role="menuitem"
+                            >
+                              <span className="flex items-center gap-3">
+                                <span className="text-lg leading-none">{l.flag}</span>
+                                <span>{l.label}</span>
+                              </span>
+                              <span className="text-xs font-extrabold text-slate-500">{l.code}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+
+
               <button
                 onClick={() => setCurrentPage("contact")}
                 className="ml-2 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-extrabold text-white shadow-lg transition hover:bg-black"
@@ -1084,6 +1181,46 @@ export default function TATCGWebsite(): React.ReactElement {
 
           {mobileMenuOpen && (
             <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl md:hidden">
+              
+              {/* Mobile Locale Switcher */}
+              <div className="mb-2">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <div className="mb-2 flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-slate-500">
+                    <Globe className="h-4 w-4" />
+                    Language / Locale
+                  </div>
+                  <div className="grid gap-2">
+                    {LOCALES.map((l) => {
+                      const active = l.code === currentLocale;
+                      return (
+                        <button
+                          key={l.code}
+                          type="button"
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            switchLocale(l.code);
+                          }}
+                          className={cx(
+                            "flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-extrabold transition",
+                            active ? "bg-blue-600 text-white" : "bg-white text-slate-800 hover:bg-slate-100"
+                          )}
+                        >
+                          <span className="flex items-center gap-3">
+                            <span className="text-lg leading-none">{l.flag}</span>
+                            <span>{l.label}</span>
+                          </span>
+                          <span className={cx("text-xs font-extrabold", active ? "text-white/80" : "text-slate-500")}>
+                            {l.code}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              
+              
               <div className="grid gap-2">
                 {menuItems.map((item) => (
                   <button
