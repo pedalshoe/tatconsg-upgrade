@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import {FaInstagram, FaFacebook, FaLinkedin, FaYoutube} from "react-icons/fa6";
+import { FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa6";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
@@ -1029,21 +1029,29 @@ export default function TATCGWebsite(): React.ReactElement {
             </div>
             <div>
               <h2 className="text-xl font-extrabold text-slate-900">Our Commitment to Privacy</h2>
-              <p className="text-sm text-slate-600">We protect your information and explain how it is used.</p>
+              <p className="text-sm text-slate-600">At TAT Consulting Group, Inc., we value your trust and are committed to protecting your personal information. This notice explains how we handle your data when you use our services or visit our website.
+</p>
             </div>
           </div>
 
           {[
             {
               title: "Information We Collect",
-              body: "We collect information you provide when you submit forms, apply for positions, or request services.",
+              body: "We may collect information such as your name, contact details, tax/financial records, employment data, and website usage details.",
             },
             {
               title: "How We Use Information",
-              body: "We use information to respond to inquiries, provide services, and improve the website experience.",
+              body: "Your information is used to: Provide tax, HR, business advisory, and training services. Comply with legal and regulatory requirements in Liberia, Sierra Leone, and elsewhere. Improve our services and communicate with you.",
             },
-            { title: "Security", body: "We implement measures to safeguard your information." },
-            { title: "Contact Us", body: "Questions about privacy? Email frontdesk@tatconsg.com." },
+            { title: "Data Sharing",
+              body: "We do not sell your information. We may share data only with: Regulators when legally required. Trusted service providers and partners bound by confidentiality. Legal authorities when necessary to comply with the law.",
+            },
+            {
+              title: "Your Rights",
+              body: "You may request access, correction, or deletion of your data, and in some cases, restrict how we process it. To exercise your rights, contact us at frontdesktatconsgcom."},
+            { title: "Security", body: "We use strict measures to protect your data and keep it only as long as necessary for legal or service purposes." },
+            { title: "Cookies", body: "Our website may use cookies to improve your browsing experience. You can adjust your browser settings to manage or disable cookies." },
+            { title: "Contact Us", body: "If you have questions about this Privacy Notice, please contact us at: TAT Consulting Group, Inc. 2nd Floor, Danny Horton Building, A-1254 Horton Avenue, Monrovia & Sierra Leone. Email: frontdesk@tatconsg.com" },
           ].map((s) => (
             <div key={s.title}>
               <h3 className="text-lg font-extrabold text-slate-900">{s.title}</h3>
