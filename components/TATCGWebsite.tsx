@@ -402,7 +402,7 @@ export default function TATCGWebsite(): React.ReactElement {
             </h1>
 
             <p className="mt-6 text-lg leading-relaxed text-sky-100/90 sm:text-xl">
-              TAT Consulting Group helps organizations win in complex environments—through rigorous advisory, compliant execution,
+              TAT Consulting Group helps organizations win in complex environments - through rigorous advisory, compliant execution,
               and leadership-grade delivery across Business Advisory, Tax Advisory, and Professional Development.
             </p>
 
@@ -437,7 +437,7 @@ export default function TATCGWebsite(): React.ReactElement {
         <div className="mx-auto max-w-7xl px-6">
           <SectionTitle
             eyebrow="Authority & execution"
-            title="Regional Advisory Leadership—Designed to Deliver Outcomes"
+            title="Regional Advisory Leadership - Designed to Deliver Outcomes"
             subtitle="TAT Consulting Group is built for organizations that can’t afford uncertainty: regulatory pressure, cross-border complexity, and high-stakes decision-making."
             align="left"
           />
@@ -578,7 +578,7 @@ export default function TATCGWebsite(): React.ReactElement {
         </div>
       </section>
 
-      {/* Proof / mini cases — key for $16.5K credibility */}
+      {/* Proof / mini cases - key for $16.5K credibility */}
       <section className="bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-6">
           <SectionTitle
@@ -633,7 +633,7 @@ export default function TATCGWebsite(): React.ReactElement {
         </div>
       </section>
 
-      {/* Conversion CTA — “book a consult” vibe */}
+      {/* Conversion CTA - “book a consult” vibe */}
       <section className="bg-gradient-to-r from-blue-700 via-blue-800 to-slate-950 py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
@@ -902,7 +902,7 @@ export default function TATCGWebsite(): React.ReactElement {
                   <div className="flex items-start gap-2 rounded-xl border border-green-200 bg-green-50 p-4 text-green-900">
                     <CheckCircle className="mt-0.5 h-5 w-5" />
                     <p className="text-sm">
-                      Thank you—message received. We’ll respond within <b>24–48 hours</b>.
+                      Thank you - message received. We’ll respond within <b>24–48 hours</b>.
                     </p>
                   </div>
                 )}
@@ -963,7 +963,7 @@ export default function TATCGWebsite(): React.ReactElement {
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-cyan-200" />
-                    <span>Mon–Fri: 9am–6pm</span>
+                    <span>Mon-Fri: 9am-6pm</span>
                   </div>
                 </div>
 
@@ -1324,7 +1324,7 @@ export default function TATCGWebsite(): React.ReactElement {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-slate-300">
                   <Clock className="h-4 w-4 text-cyan-200" />
-                  <span>Mon–Fri: 9am–6pm</span>
+                  <span>Mon-Fri: 9am-6pm</span>
                 </div>
               </div>
             </div>
