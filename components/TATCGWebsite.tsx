@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa6";
 import { usePathname, useRouter } from "next/navigation";
+import { /*useLocale,*/ useTranslations } from "next-intl";
 import {
   Menu,
   X,
@@ -157,6 +158,9 @@ export default function TATCGWebsite(): React.ReactElement {
 
   const router = useRouter();
   const pathname = usePathname() || "/";
+  // const my_locale = useLocale();
+  // console.log("using: " + my_locale);
+  const t = useTranslations();
 
   const LOCALES = useMemo(
     () => [
@@ -235,11 +239,11 @@ export default function TATCGWebsite(): React.ReactElement {
 
   const menuItems = useMemo(
     () => [
-      { id: "home", label: "Home" },
-      { id: "services", label: "Services" },
-      { id: "contact", label: "Contact" },
-      { id: "jobs", label: "Careers" },
-      { id: "privacy", label: "Privacy" },
+      { id: "home", label: t("Nav.home") },
+      { id: "services", label: t("Nav.services") },
+      { id: "contact", label: t("Nav.contact") },
+      { id: "jobs", label: t("Nav.careers") },
+      { id: "privacy", label: t("Nav.privacy") },
     ],
     []
   );
@@ -395,15 +399,14 @@ export default function TATCGWebsite(): React.ReactElement {
             </div>
 
             <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
-              Advisory Built for Pressure.
+              {t("Hero.title")}
               <span className="mt-2 block bg-gradient-to-r from-sky-200 via-cyan-200 to-white bg-clip-text text-transparent pb-1">
-                Strategy. Tax. Talent. Executed.
+                {t("Hero.subtitle")}
               </span>
             </h1>
 
             <p className="mt-6 text-lg leading-relaxed text-sky-100/90 sm:text-xl">
-              TAT Consulting Group helps organizations win in complex environments - through rigorous advisory, compliant execution,
-              and leadership-grade delivery across Business Advisory, Tax Advisory, and Professional Development.
+              {t("Hero.shortsummary")}
             </p>
 
             <TopCTA />

@@ -1,7 +1,8 @@
 {
-  "Nav": { "services": "Services", "contact": "Contact" },
+  "Nav": { "home": "Accueil", "services": "Services", "contact": "Contact", "careers": "Carrières", "privacy": "Confidentialité" },
   "Hero": {
     "title": "Conseil conçu pour la pression.",
-    "subtitle": "Stratégie. Fiscalité. Talents. Exécution."
+    "subtitle": "Stratégie. Fiscalité. Talents. Exécution.",
+    "shortsummary": "TAT Consulting Group aide les organisations à réussir dans des environnements complexes grâce à des conseils rigoureux, une exécution conforme et une prestation de haut niveau dans les domaines du conseil aux entreprises, du conseil fiscal et du développement professionnel."
   }
 }

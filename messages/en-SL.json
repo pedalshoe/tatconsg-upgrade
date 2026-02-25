@@ -1,7 +1,8 @@
 {
-  "Nav": { "services": "Services", "contact": "Contact" },
+  "Nav": { "home": "Home", "services": "Services", "contact": "Contact", "careers": "Careers", "privacy": "Privacy" },
   "Hero": {
     "title": "Advisory Built for Pressure.",
-    "subtitle": "Strategy. Tax. Talent. Executed."
+    "subtitle": "Strategy. Tax. Talent. Executed.",
+    "shortsummary": "TAT Consulting Group helps organizations succeed in complex environments through rigorous advice, compliant execution, and high-level service in corporate advisory, tax advisory, and professional development."
   }
 }
