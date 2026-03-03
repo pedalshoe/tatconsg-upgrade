@@ -505,7 +505,7 @@ export default function TATCGWebsite(): React.ReactElement {
             </div>
 
             <div className="lg:col-span-5">
-              <ClientConfidence testimonials={testimonials} />
+              <ClientConfidence testimonials={testimonials} intervalMs={5000} />
             </div>
           </div>
         </div>

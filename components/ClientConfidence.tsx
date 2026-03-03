@@ -18,7 +18,7 @@ type Props = {
 
 export default function ClientConfidence({
   testimonials,
-  intervalMs = 6000,
+  intervalMs = 7000,
   title = "Client Confidence",
 }: Props) {
   const safeTestimonials = useMemo(() => {
