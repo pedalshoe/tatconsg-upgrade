@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import ClientConfidence from "@/components/ClientConfidence";
 import { FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa6";
 import { usePathname, useRouter } from "next/navigation";
-import { /*useLocale,*/ useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Menu,
   X,
@@ -164,30 +165,37 @@ export default function TATCGWebsite(): React.ReactElement {
 
   const LOCALES = useMemo(
     () => [
+      { code: "en-US", label: "English-US", flag: "🇺🇸" },
       { code: "en-LR", label: "English-Liberia", flag: "🇱🇷" },
       { code: "en-SL", label: "English-Sierra Leone", flag: "🇸🇱" },
-      { code: "en-US", label: "English-US", flag: "🇺🇸" },
-      { code: "fr-FR", label: "French-France", flag: "🇫🇷" },
+      { code: "fr-FR", label: "French-France", flag: "🇫🇷" }
     ] as const,
     []
   );
 
   type LocaleCode = (typeof LOCALES)[number]["code"];
 
-  const currentLocale = useMemo<LocaleCode>(() => {
-    const seg = pathname.split("/")[1] || "";
-    const found = LOCALES.find((l) => l.code === seg);
-    return (found?.code || "en-US") as LocaleCode;
-  }, [pathname, LOCALES]);
+  const currentLocale = useLocale() as LocaleCode; // "en-US" etc.
+
+  const currentLocaleMeta = useMemo(() => {
+    return LOCALES.find((l) => l.code === currentLocale) ?? LOCALES[0];
+  }, [currentLocale, LOCALES]);
 
   const [localeOpen, setLocaleOpen] = useState(false);
 
   const switchLocale = (next: LocaleCode) => {
     setLocaleOpen(false);
-    // Keep it simple: locales are your top-level route segment: /en-US, /en-LR, /en-SL, /fr-FR
-    router.push(`/${next}`);
-    // Optional: keep the current in-page section consistent
-    // setCurrentPage("home");
+
+    const parts = (pathname || "/").split("/");
+    // parts: ["", "en-US", "something", ...]
+    const first = parts[1] as LocaleCode;
+
+    if (LOCALES.some((l) => l.code === first)) {
+      parts[1] = next;
+      router.push(parts.join("/") || `/${next}`);
+    } else {
+      router.push(`/${next}${pathname.startsWith("/") ? pathname : `/${pathname}`}`);
+    }
   };
 
   // TODO worlwin: small testimonial slider
@@ -217,8 +225,7 @@ export default function TATCGWebsite(): React.ReactElement {
     ],
     []
   );
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
-
+ 
   useEffect(() => {
     const handleScroll = (): void => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
@@ -226,16 +233,20 @@ export default function TATCGWebsite(): React.ReactElement {
   }, []);
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(t);
-  }, [testimonials.length]);
-
-  useEffect(() => {
     // Jump to top on page change
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
+
+  useEffect(() => {
+    if (!localeOpen) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLocaleOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [localeOpen]);
 
   const menuItems = useMemo(
     () => [
@@ -243,9 +254,9 @@ export default function TATCGWebsite(): React.ReactElement {
       { id: "services", label: t("Nav.services") },
       { id: "contact", label: t("Nav.contact") },
       { id: "jobs", label: t("Nav.careers") },
-      { id: "privacy", label: t("Nav.privacy") },
+      { id: "privacy", label: t("Nav.privacy") }
     ],
-    []
+    [t]
   );
 
   const services = useMemo(
@@ -494,41 +505,7 @@ export default function TATCGWebsite(): React.ReactElement {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="rounded-2xl bg-gradient-to-br from-slate-900 via-blue-950 to-blue-700 p-8 text-white shadow-2xl">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-sky-200">
-                  <Star className="h-4 w-4 text-cyan-200" />
-                  Client Confidence
-                </div>
-                <div className="mt-5 flex gap-1">
-                  {Array.from({ length: testimonials[testimonialIndex].rating }).map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="mt-4 text-lg leading-relaxed text-sky-50/95">
-                  “{testimonials[testimonialIndex].text}”
-                </p>
-                <div className="mt-6 text-sm font-semibold text-white">
-                  {testimonials[testimonialIndex].author}{" "}
-                  <span className="font-normal text-sky-100/80">• {testimonials[testimonialIndex].org}</span>
-                </div>
-
-                <div className="mt-8 grid grid-cols-3 gap-3">
-                  {["Rigor", "Speed", "Control"].map((x) => (
-                    <div key={x} className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
-                      <div className="text-sm font-extrabold">{x}</div>
-                      <div className="mt-1 text-[11px] text-sky-100/70">Deliverables</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {["Extractives", "Telecom", "Logistics", "Finance", "Education"].map((x) => (
-                    <span key={x} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-sky-100/90">
-                      {x}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <ClientConfidence testimonials={testimonials} />
             </div>
           </div>
         </div>
@@ -923,8 +900,8 @@ export default function TATCGWebsite(): React.ReactElement {
           <div className="lg:col-span-5">
             <div className="space-y-6">
               {[
-                { country: "LIBERIA", address: "2nd Floor, Danny Horton Building", street: "A-1254 Horton Avenue, Monrovia" },
-                { country: "SIERRA LEONE", address: "22 Wellington Street", street: "Freetown, Sierra Leone" },
+                { country: "LIBERIA", address: "2nd Floor, Danny Horton Building", street: "A-1254 Horton Avenue, Monrovia", map_source: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d840.5944237381965!2d-10.798600385585413!3d6.306803886219857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf09f9000c84ae7f%3A0xace458728a586c1d!2sHorton%20House!5e1!3m2!1sen!2sus!4v1772531525254!5m2!1sen!2sus" },
+                { country: "SIERRA LEONE", address: "22 Wellington Street", street: "Freetown, Sierra Leone", map_source: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d826.9688094640613!2d-13.238761452407037!3d8.485561503704997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf04c3a342562989%3A0xd4aa1a7915c129a8!2s22%20Wellington%20St%2C%20Freetown%2C%20Sierra%20Leone!5e1!3m2!1sen!2sus!4v1772572428508!5m2!1sen!2sus" },
               ].map((office) => (
                 <div key={office.country} className="rounded-2xl border border-slate-200 bg-white p-8 shadow-xl">
                   <div className="mb-4 flex items-center justify-between gap-3">
@@ -941,7 +918,12 @@ export default function TATCGWebsite(): React.ReactElement {
                     </div>
                   </div>
                   <div className="mt-6 rounded-xl bg-slate-100 p-6 text-center text-xs text-slate-500">
-                    Map embed placeholder (Google Maps / Mapbox)
+                    <iframe
+                      src={office.map_source}
+                      style={{ border:0 }}
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"></iframe>
                   </div>
                 </div>
               ))}
@@ -1125,8 +1107,10 @@ export default function TATCGWebsite(): React.ReactElement {
                   aria-haspopup="menu"
                   aria-expanded={localeOpen}
                   aria-label="Change language"
+                  title={currentLocaleMeta.label}
                 >
                   <Globe className="h-4 w-4" />
+                  {currentLocaleMeta && <span className="text-lg leading-none" aria-hidden="true">{currentLocaleMeta.flag}</span>}
                   <ChevronDown className="h-4 w-4 opacity-70" />
                 </button>
 
