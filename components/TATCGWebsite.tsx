@@ -921,9 +921,9 @@ export default function TATCGWebsite(): React.ReactElement {
                     <iframe
                       src={office.map_source}
                       style={{ border:0 }}
-                      allowfullscreen=""
+                      allow="fullscreen"
                       loading="lazy"
-                      referrerpolicy="no-referrer-when-downgrade"></iframe>
+                      referrerPolicy="no-referrer-when-downgrade"></iframe>
                   </div>
                 </div>
               ))}
